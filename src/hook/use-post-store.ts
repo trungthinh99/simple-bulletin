@@ -1,31 +1,31 @@
 import { create } from 'zustand';
+import { PostStore } from '../type/post';
+import { persist } from 'zustand/middleware';
 
-const usePostStore = create((set) => ({
-  posts: JSON.parse(localStorage.getItem('posts') ?? '[]') || [],
+const usePostStore = create<PostStore>()(
+  persist(
+    (set) => ({
+      posts: [],
 
-  addPost: (title, content) =>
-    set((state) => {
-      const newPost = { id: Date.now(), title, content };
-      const updatedPosts = [...state.posts, newPost];
-      localStorage.setItem('posts', JSON.stringify(updatedPosts));
-      return { posts: updatedPosts };
+      addPost: (title, content) =>
+        set((state) => ({
+          posts: [...state.posts, { id: Date.now(), title, content }],
+        })),
+
+      updatePost: (id, title, content) =>
+        set((state) => ({
+          posts: state.posts.map((post) => (post.id === id ? { ...post, title, content } : post)),
+        })),
+
+      deletePost: (id) =>
+        set((state) => ({
+          posts: state.posts.filter((post) => post.id !== id),
+        })),
     }),
-
-  updatePost: (id, title, content) =>
-    set((state) => {
-      const updatedPosts = state.posts.map((post) =>
-        post.id === id ? { ...post, title, content } : post
-      );
-      localStorage.setItem('posts', JSON.stringify(updatedPosts));
-      return { posts: updatedPosts };
-    }),
-
-  deletePost: (id) =>
-    set((state) => {
-      const updatedPosts = state.posts.filter((post) => post.id !== id);
-      localStorage.setItem('posts', JSON.stringify(updatedPosts));
-      return { posts: updatedPosts };
-    }),
-}));
+    {
+      name: 'posts',
+    }
+  )
+);
 
 export default usePostStore;
