@@ -5,7 +5,7 @@ export const LABEL = {
   update_title: 'Update bulletin',
   bulletin_board: 'Bulletin Board',
   bulletin_list: 'Bulletin List',
-  no_bulletin: 'Empty list',
+  no_bulletin: "Empty list. Let's create one!",
   placeholder: {
     title: 'Please enter title...',
     desc: 'Please enter description...',

@@ -157,10 +157,13 @@ const App: React.FC = () => {
                     p: 2,
                     py: 1.5,
                     borderRadius: 2,
-                    ':hover': {
-                      transform: 'translateY(-3px)',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                    },
+                    ':hover':
+                      editingPost?.id !== post.id
+                        ? {
+                            transform: 'translateY(-3px)',
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                          }
+                        : {},
                     transition: 'transform 0.2s, box-shadow 0.2s',
                     mb: '12px',
                   }}
@@ -180,6 +183,7 @@ const App: React.FC = () => {
                         borderRadius: '6px',
                         backgroundColor: '#f0ad4e',
                       }}
+                      disabled={editingPost?.id === post.id}
                     >
                       {LABEL.button_label.edit}
                     </Button>
@@ -188,6 +192,7 @@ const App: React.FC = () => {
                       color="error"
                       onClick={() => setConfirmDelete({ isDelete: true, id: post.id })}
                       sx={{ textTransform: 'none', borderRadius: '6px' }}
+                      disabled={editingPost?.id === post.id}
                     >
                       {LABEL.button_label.delete}
                     </Button>
