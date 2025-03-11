@@ -3,21 +3,19 @@ import React, { useState } from 'react';
 import { Post } from './type/post';
 import usePostStore from './hook/use-post-store';
 import { ToastContainer, toast } from 'react-toastify';
-import {
-  Backdrop,
-  Box,
-  Button,
-  Card,
-  Container,
-  Divider,
-  Fade,
-  Modal,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
 import { LABEL } from './constants/label';
 import Grid from '@mui/material/Grid2';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import Fade from '@mui/material/Fade';
+import Modal from '@mui/material/Modal';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
 
 const App: React.FC = () => {
   const { posts, addPost, updatePost, deletePost } = usePostStore();
